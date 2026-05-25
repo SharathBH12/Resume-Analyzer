@@ -86,17 +86,15 @@ def upload_resume(request):
 
         job_description = job_description_text.lower()
 
-        file_path = 'media/' + uploaded_file.name
-
         # Save uploaded file
-        with open(file_path, 'wb+') as destination:
+        with open(uploaded_file.name, 'wb+') as destination:
 
             for chunk in uploaded_file.chunks():
 
                 destination.write(chunk)
 
         # Extract text from PDF
-        with pdfplumber.open(file_path) as pdf:
+        with pdfplumber.open(uploaded_file.name) as pdf:
 
             for page in pdf.pages:
 
